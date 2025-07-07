@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF转Word在线转换工具 - 专业版</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- 动态背景粒子 -->
+    <div class="particles" id="particles"></div>
+    
+    <div class="main-container">
+        <div class="converter-card">
+            <!-- 头部区域 -->
+            <div class="header">
+                <div class="logo">
+                    <i class="fas fa-file-pdf"></i>
+                    <i class="fas fa-arrow-right" style="font-size: 0.6em; margin: 0 20px;"></i>
+                    <i class="fas fa-file-word"></i>
+                </div>
+                <h1 class="title">文档转换器</h1>
+                <p class="subtitle">支持PDF ↔ Word双向转换，保持原始格式与布局</p>
+            </div>
+            
+            <!-- 消息提示 -->
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="message error">
+                            <i class="fas fa-exclamation-triangle" style="margin-right: 10px;"></i>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            
+            <!-- 上传表单 -->
+            <form method="post" enctype="multipart/form-data" id="uploadForm">
+                <div class="upload-zone">
+                    <div class="drag-drop-area" id="dropArea">
+                        <input type="file" name="file" accept=".pdf,.docx,.doc" required class="file-input" id="fileInput">
+                        <div class="upload-content">
+                            <div class="upload-icon">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                            </div>
+                            <div class="upload-text">拖拽文档到此处</div>
+                            <div class="upload-hint">支持PDF ↔ Word双向转换（最大100MB）</div>
+                        </div>
+                    </div>
+                    
+                    <div class="file-info" id="fileInfo">
+                        <div class="file-name" id="fileName">
+                            <i class="fas fa-file-pdf"></i>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="button-container">
+                    <button type="submit" class="convert-button" id="convertBtn" disabled>
+                        <i class="fas fa-magic" style="margin-right: 10px;"></i>
+                        开始转换
+                    </button>
+                </div>
+                
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <div class="loading-text">正在转换中，请稍候...</div>
+                </div>
+            </form>
+            
+            <!-- 功能特点 -->
+            <div class="features">
+                <h3 class="features-title">为什么选择我们？</h3>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="feature-title">隐私保护</div>
+                        <div class="feature-desc">本地处理，文件不上传云端，保护您的隐私安全</div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <div class="feature-title">格式保持</div>
+                        <div class="feature-desc">智能识别文字、图片、表格，完美保持原始格式</div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <div class="feature-title">高速转换</div>
+                        <div class="feature-desc">优化的转换算法，快速处理大文件</div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-download"></i>
+                        </div>
+                        <div class="feature-title">即时下载</div>
+                        <div class="feature-desc">转换完成后立即下载，无需等待</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 页脚 -->
+            <div class="footer">
+                <p>© 2024 PDF转Word转换器 - 专业文档转换工具</p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
